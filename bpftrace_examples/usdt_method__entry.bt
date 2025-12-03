@@ -1,0 +1,16 @@
+BEGIN {
+    @filters["com/example/api/UserController"] = 1;
+    @filters["com/example/api/User"] = 1;
+}
+
+usdt:/home/usr/.sdkman/candidates/java/current/lib/server/libjvm.so:hotspot:method__entry
+{
+    if (@filters[str(arg1, arg2+1)]) {
+        $class_name = str(arg1, arg2+1);
+        $method_name = str(arg3, arg4+1);
+        $signature = str(arg5);
+    
+        printf("%-10.10d %-40.40s %-30.30s %s\n", tid, $class_name, $method_name, $signature);
+    }
+}
+
